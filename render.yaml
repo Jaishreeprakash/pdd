@@ -7,8 +7,8 @@ services:
     env: python
     rootDir: backend
     plan: free
-    buildCommand: pip install -r requirements.txt && chmod +x start.sh
-    startCommand: bash start.sh
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATABASE_URL
         sync: false   # Set in Render dashboard: your Supabase PostgreSQL URL
@@ -29,7 +29,7 @@ services:
       - key: SUPABASE_SECRET_KEY
         sync: false   # Set in Render dashboard
       - key: CORS_ORIGINS
-        value: "*"
+        value: '["*"]'
 
   # ──────────────────────────────────────────────
   # React Web Frontend (Static Site)
