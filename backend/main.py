@@ -33,10 +33,16 @@ _ai_svc = _AIService()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    import logging
+    _log = logging.getLogger(__name__)
     # Import all models so they are registered with Base
     import models.user  # noqa: F401
     import models.tracking  # noqa: F401
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+        _log.info("✅ Database tables created/verified successfully")
+    except Exception as exc:
+        _log.error(f"⚠️  DB init failed (app will still start): {exc}")
     yield
 
 
