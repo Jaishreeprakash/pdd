@@ -14,7 +14,7 @@ import {
   Recommendation,
 } from '../types';
 
-const API_BASE_URL = 'http://192.168.31.10:8000/api/v1';
+const API_BASE_URL = 'https://burnout-backend-l438.onrender.com/api/v1';
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
