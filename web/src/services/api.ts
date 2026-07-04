@@ -17,7 +17,9 @@ import {
   Recommendation,
 } from '../types';
 
-const API_BASE_URL = 'http://172.20.10.2:8000/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_URL
+  ? `https://${import.meta.env.VITE_API_URL}/api/v1`
+  : (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1');
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
